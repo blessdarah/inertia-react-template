@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('book_requests', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->mediumText('message');
+            $table->string('student_email');
+            $table->enum("status", ['pending', 'resolved', 'other'])->default('pending');
             $table->timestamps();
         });
     }

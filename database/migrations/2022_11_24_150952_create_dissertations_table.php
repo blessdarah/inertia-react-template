@@ -15,6 +15,17 @@ return new class extends Migration
     {
         Schema::create('dissertations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('dissertation_type_id');
+            $table->foreignId('school_id');
+            $table->foreignId('department_id');
+
+            $table->text('abstract')->nullable();
+            $table->string('title');
+            $table->string('author');
+            $table->string('supervisor');
+            $table->string('cover_page');
+            $table->string('file');
+
             $table->timestamps();
         });
     }

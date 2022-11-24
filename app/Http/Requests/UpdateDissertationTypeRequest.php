@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\DissertationType;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateDissertationTypeRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateDissertationTypeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->can('update', DissertationType::class);
     }
 
     /**
@@ -24,7 +25,7 @@ class UpdateDissertationTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string'
         ];
     }
 }

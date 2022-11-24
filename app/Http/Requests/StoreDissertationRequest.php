@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Dissertation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreDissertationRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreDissertationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->can('create', Dissertation::class);
     }
 
     /**
@@ -24,7 +25,27 @@ class StoreDissertationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "school_id" => 'required',
+            "department_id" => 'required',
+            "abstract" => 'required|string', 
+            "title" => 'required|string', 
+            "author" => 'required|string', 
+            "supervisor" => 'required|string', 
+            "cover_page" => 'required|image|max:500', 
+            "file" => [ 'required', 
+                        File::types(['pdf'])
+                            ->min(1024)
+                            ->max(5 * 1024)
+                    ]
+        ];
+    }
+
+
+    public function messages() 
+    {
+        return [
+            'school_id.required' => "School is required",
+            'department_id.required' => "Department is required"
         ];
     }
 }

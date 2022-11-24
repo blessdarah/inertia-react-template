@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Department;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateDepartmentRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateDepartmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->can('update', Department::class);
     }
 
     /**
@@ -24,7 +25,16 @@ class UpdateDepartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'school_id' => 'required',
+            'name' => 'required|string',
+            'description' => 'required|string'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'school_id.required' => 'School must be provided'
         ];
     }
 }

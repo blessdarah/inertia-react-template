@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\School;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSchoolRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreSchoolRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->can('create', School::class);
     }
 
     /**
@@ -24,7 +25,8 @@ class StoreSchoolRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'required'
         ];
     }
 }
