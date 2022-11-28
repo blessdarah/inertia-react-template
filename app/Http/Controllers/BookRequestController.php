@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBookRequestRequest;
 use App\Http\Requests\UpdateBookRequestRequest;
 use App\Models\BookRequest;
+use Inertia\Inertia;
 
 class BookRequestController extends Controller
 {
@@ -15,17 +16,8 @@ class BookRequestController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $bookRequests = BookRequest::all();
+        return Inertia::render('BookRequest/BookRequestPage', ['bookRequests' => $bookRequests]);
     }
 
     /**
@@ -36,29 +28,9 @@ class BookRequestController extends Controller
      */
     public function store(StoreBookRequestRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\BookRequest  $bookRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BookRequest $bookRequest)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\BookRequest  $bookRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(BookRequest $bookRequest)
-    {
-        //
+        $data = $request->validated();
+        BookRequest::create($data);
+        return redirect()->back();
     }
 
     /**
@@ -70,7 +42,9 @@ class BookRequestController extends Controller
      */
     public function update(UpdateBookRequestRequest $request, BookRequest $bookRequest)
     {
-        //
+        $data = $request->validated();
+        $bookRequest->update($data);
+        return redirect()->back();
     }
 
     /**
@@ -81,6 +55,7 @@ class BookRequestController extends Controller
      */
     public function destroy(BookRequest $bookRequest)
     {
-        //
+        $bookRequest->delete();
+        return redirect()->back();
     }
 }

@@ -17,7 +17,10 @@ class BookRequestFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'student_email' => $this->faker->email(),
+            'title' => $this->faker->sentence,
+            'message' => $this->faker->sentences(4, asText: true),
+            'status' => 'pending'
         ];
     }
 }

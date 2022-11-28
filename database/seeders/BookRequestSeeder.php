@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\BookRequest;
+use Database\Factories\BookRequestFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +16,6 @@ class BookRequestSeeder extends Seeder
      */
     public function run()
     {
-        //
+        BookRequest::factory()->count(20)->create();
     }
 }

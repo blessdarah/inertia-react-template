@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\BookRequestController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DissertationController;
+use App\Http\Controllers\DissertationTypeController;
+use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,6 +21,9 @@ use Inertia\Inertia;
 
 Route::inertia('/', 'Welcome')->name('home');
 Route::inertia('/about', 'About')->name('about');
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-});
+
+Route::resource('book-requests', BookRequestController::class);
+Route::resource('departments', DepartmentController::class);
+Route::resource('dissertations', DissertationController::class);
+Route::resource('dissertation-types', DissertationTypeController::class);
+Route::resource('schools', SchoolController::class);
