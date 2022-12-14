@@ -9,15 +9,15 @@ class Department extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ["name", "description", "school_id"];
 
     public function school()
     {
         return $this->belongsTo(School::class);
-    } 
+    }
 
     public function dissertations()
     {
         return $this->hasMany(Dissertation::class);
-    } 
+    }
 }

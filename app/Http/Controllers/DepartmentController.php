@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
 use App\Models\Department;
+use App\Models\School;
+use Inertia\Inertia;
 
 class DepartmentController extends Controller
 {
@@ -15,7 +17,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        $departments = Department::all();
+        $schools = School::all();
+        return Inertia::render("Department/DepartmentPage", ["departments" => $departments, "schools" => $schools]);
     }
 
     /**
@@ -36,7 +40,9 @@ class DepartmentController extends Controller
      */
     public function store(StoreDepartmentRequest $request)
     {
-        //
+        $data = $request->validated();
+        Department::create($data);
+        return redirect()->route('departments.index');
     }
 
     /**
@@ -58,7 +64,7 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        return Inertia::render('Department/EditDeparment', ["department" => $department]);
     }
 
     /**
@@ -70,7 +76,9 @@ class DepartmentController extends Controller
      */
     public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        //
+        $data = $request->validated();
+        $department->update($data);
+        return redirect()->route("departments.index");
     }
 
     /**
@@ -81,6 +89,7 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        $department->delete();
+        return redirect()->route("departments.index");
     }
 }
