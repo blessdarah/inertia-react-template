@@ -1,3 +1,4 @@
+import { SaveOutlined } from "@ant-design/icons";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-react";
 import { Button, Form, Input, message, Select } from "antd";
@@ -87,7 +88,13 @@ const BookRequestForm = ({ bookRequest, mode = FORM_MODE.CREATE }) => {
                     wrapperCol={{ offset: 4, span: 16 }}
                     style={{ marginBottom: 0 }}
                 >
-                    <Button htmlType="submit">Save</Button>
+                    <Button
+                        htmlType="submit"
+                        icon={<SaveOutlined />}
+                        type="primary"
+                    >
+                        Save
+                    </Button>
                 </Item>
             </Form>
         </div>

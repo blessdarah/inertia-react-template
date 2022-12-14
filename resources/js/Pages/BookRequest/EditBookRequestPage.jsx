@@ -1,5 +1,4 @@
-import { ArrowLeftOutlined, BackwardFilled } from "@ant-design/icons";
-import { Inertia } from "@inertiajs/inertia";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Button, Col, Row } from "antd";
 import React from "react";
 import BookRequestForm from "../../components/book-request/book-request-form";
@@ -11,8 +10,17 @@ const EditBookRequestPage = ({ bookRequest }) => {
         <AppShell>
             <Row>
                 <Col md={16} offset={4}>
-                    <h3>Edit book request</h3>
-                    <Button icon={<ArrowLeftOutlined />}>back</Button>
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            margin: "1rem 0",
+                        }}
+                    >
+                        <h3>Edit book request</h3>
+                        <Button icon={<ArrowLeftOutlined />}>back</Button>
+                    </div>
                     <BookRequestForm
                         bookRequest={bookRequest}
                         mode={FORM_MODE.EDIT}

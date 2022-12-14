@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSchoolRequest;
 use App\Http\Requests\UpdateSchoolRequest;
 use App\Models\School;
+use Inertia\Inertia;
 
 class SchoolController extends Controller
 {
@@ -15,7 +16,7 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('School/SchoolPage', ["schools" => School::all()]);
     }
 
     /**
@@ -36,7 +37,9 @@ class SchoolController extends Controller
      */
     public function store(StoreSchoolRequest $request)
     {
-        //
+        $data = $request->validated();
+        School::create($data);
+        return redirect()->back();
     }
 
     /**
@@ -58,7 +61,7 @@ class SchoolController extends Controller
      */
     public function edit(School $school)
     {
-        //
+        return Inertia::render("/School/EditSchoolPage", ["school" => $school]);
     }
 
     /**
@@ -70,7 +73,9 @@ class SchoolController extends Controller
      */
     public function update(UpdateSchoolRequest $request, School $school)
     {
-        //
+        $data = $request->validated();
+        $school->update($data);
+        return redirect()->route('schools.index');
     }
 
     /**
@@ -81,6 +86,7 @@ class SchoolController extends Controller
      */
     public function destroy(School $school)
     {
-        //
+        $school->delete();
+        return redirect()->route('schools.index');
     }
 }

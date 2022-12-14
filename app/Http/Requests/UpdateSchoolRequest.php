@@ -14,7 +14,8 @@ class UpdateSchoolRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('update', School::class);
+        // return $this->user()->can('update', School::class);
+        return true;
     }
 
     /**
