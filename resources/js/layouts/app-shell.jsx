@@ -1,27 +1,19 @@
-import { Col, Layout, Row } from 'antd'
-import { Header, Content } from 'antd/es/layout/layout'
-import React from 'react'
-import { AppModalProvider } from '../hooks/app-modal'
+import { Layout } from "antd";
+import React from "react";
+import { AppModalProvider } from "../hooks/app-modal";
+import { AppStateProvider } from "../hooks/app-state-hook";
+import LayoutContent from "./layout-content";
 
-const AppShell = ({children}) => {
-
+const AppShell = ({ children }) => {
     return (
-        <AppModalProvider>
-        <Layout theme="light">
-          <Header>header</Header>
-          <Layout>
-            <Content style={{background: '#fff', overflowX:'hidden'}}>
-                <Row gutter={[16, 16]}>
-                    <Col md={20} offset={2}>
-                        {children}
-                    </Col>
-                </Row>
-            </Content>
-          </Layout>
-        </Layout>
+        <AppStateProvider>
+            <AppModalProvider>
+                <Layout theme="light">
+                    <LayoutContent>{children}</LayoutContent>
+                </Layout>
+            </AppModalProvider>
+        </AppStateProvider>
+    );
+};
 
-        </AppModalProvider>
-    )
-}
-
-export default AppShell
+export default AppShell;

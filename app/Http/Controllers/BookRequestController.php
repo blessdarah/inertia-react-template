@@ -20,6 +20,12 @@ class BookRequestController extends Controller
         return Inertia::render('BookRequest/BookRequestPage', ['bookRequests' => $bookRequests]);
     }
 
+    public function edit(BookRequest $bookRequest)
+    {
+        return Inertia::render('BookRequest/EditBookRequestPage', ['bookRequest' => $bookRequest]);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *

@@ -1,16 +1,16 @@
-import { Modal } from 'antd'
-import React, { useEffect, createContext, useState, useContext } from 'react'
+import { Modal } from "antd";
+import React, { useEffect, createContext, useState, useContext } from "react";
 
-const AppModalContext = createContext({})
+const AppModalContext = createContext({});
 
 export const AppModalProvider = ({ children }) => {
-    const [show, setShow] = useState(false)
-    const [content, setContent] = useState(null)
-    const [width, setWidth] = useState('30rem')
-    const [title, setTitle] = useState('Modal title')
-    const [handleSave, setHandleSave] = useState()
+    const [show, setShow] = useState(false);
+    const [content, setContent] = useState(null);
+    const [width, setWidth] = useState("30rem");
+    const [title, setTitle] = useState("Modal title");
+    const [handleSave, setHandleSave] = useState();
 
-    useEffect(() => {}, [content, title])
+    useEffect(() => {}, []);
     return (
         <>
             <AppModalContext.Provider
@@ -41,7 +41,7 @@ export const AppModalProvider = ({ children }) => {
                 {children}
             </AppModalContext.Provider>
         </>
-    )
-}
+    );
+};
 
-export const useAppModal = () => useContext(AppModalContext)
+export const useAppModal = () => useContext(AppModalContext);
