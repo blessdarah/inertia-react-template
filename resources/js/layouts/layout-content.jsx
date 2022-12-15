@@ -29,6 +29,9 @@ const LayoutContent = ({ children }) => {
                         <a href="/book-requests">Book request</a>
                     </li>
                     <li>
+                        <a href="/departments">Departments</a>
+                    </li>
+                    <li>
                         <a href="/dissertations">Dissertations</a>
                     </li>
                 </ul>

@@ -10,7 +10,7 @@ const DepartmentTableOptions = ({ record }) => {
     const { isEmpty } = useUtils();
 
     const onDelete = () => {
-        Inertia.delete(`departments/${record.id}/edit`);
+        Inertia.delete(`/departments/${record.id}`);
         if (!isEmpty(errors)) {
             message.error("Could not delete request");
         } else {
@@ -19,7 +19,7 @@ const DepartmentTableOptions = ({ record }) => {
     };
 
     const onEdit = () => {
-        Inertia.get(`departments/${record.id}/edit`);
+        Inertia.get(`/departments/${record.id}/edit`);
     };
 
     return (

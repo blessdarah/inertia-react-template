@@ -6,7 +6,6 @@ use App\Http\Controllers\DissertationController;
 use App\Http\Controllers\DissertationTypeController;
 use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------

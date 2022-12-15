@@ -73,14 +73,23 @@ const BookRequestForm = ({ bookRequest, mode = FORM_MODE.CREATE }) => {
                         validateStatus={errors && errors.status ? "error" : ""}
                         help={errors.status ?? ""}
                     >
-                        <Select>
-                            <Select.Option value="pending">
+                        <Select
+                            showSearch
+                            filterOption={(input, option) =>
+                                (option?.label ?? "")
+                                    .toLowerCase()
+                                    .includes(input.toLowerCase())
+                            }
+                        >
+                            <Select.Option label="pending" value="pending">
                                 Pending
                             </Select.Option>
-                            <Select.Option value="resolved">
+                            <Select.Option label="resolved" value="resolved">
                                 Resolved
                             </Select.Option>
-                            <Select.Option value="other">Other</Select.Option>
+                            <Select.Option label="other" value="other">
+                                Other
+                            </Select.Option>
                         </Select>
                     </Item>
                 ) : null}

@@ -2,10 +2,10 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Button, Col, Row } from "antd";
 import React from "react";
 import { FORM_MODE } from "../../components/constants";
-import SchoolForm from "../../components/school/SchoolForm";
+import DepartmentForm from "../../components/department/DepartmentForm";
 import AppShell from "../../layouts/app-shell";
 
-const EditSchoolPage = ({ school }) => {
+const EditDepartmentPage = ({ department, schools }) => {
     return (
         <Row>
             <Col md={16} offset={4}>
@@ -17,14 +17,18 @@ const EditSchoolPage = ({ school }) => {
                         margin: "1rem 0",
                     }}
                 >
-                    <h3>Edit school</h3>
+                    <h3>Edit department</h3>
                     <Button icon={<ArrowLeftOutlined />}>back</Button>
                 </div>
-                <SchoolForm school={school} mode={FORM_MODE.EDIT} />
+                <DepartmentForm
+                    department={department}
+                    schools={schools}
+                    mode={FORM_MODE.EDIT}
+                />
             </Col>
         </Row>
     );
 };
 
-EditSchoolPage.layout = (page) => <AppShell children={page} />;
-export default EditSchoolPage;
+EditDepartmentPage.layout = (page) => <AppShell children={page} />;
+export default EditDepartmentPage;

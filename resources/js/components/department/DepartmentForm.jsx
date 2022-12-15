@@ -34,7 +34,7 @@ const DepartmentForm = ({ department, schools, mode = FORM_MODE.CREATE }) => {
                 initialValues={department}
                 labelAlign="right"
                 colon={false}
-                labelCol={{ span: 4 }}
+                labelCol={{ span: 6 }}
                 wrapperCol={{ flex: 1 }}
             >
                 <Item
@@ -59,16 +59,27 @@ const DepartmentForm = ({ department, schools, mode = FORM_MODE.CREATE }) => {
                     validateStatus={errors && errors.school_id ? "error" : ""}
                     help={errors.school_id}
                 >
-                    <Select>
+                    <Select
+                        showSearch
+                        filterOption={(input, option) =>
+                            (option?.label ?? "")
+                                .toLowerCase()
+                                .includes(input.toLowerCase())
+                        }
+                    >
                         {schools.map((school) => (
-                            <Select.Option value={school.id} key={school.id}>
+                            <Select.Option
+                                label={school.name}
+                                value={school.id}
+                                key={school.id}
+                            >
                                 {school.name}
                             </Select.Option>
                         ))}
                     </Select>
                 </Item>
                 <Item
-                    wrapperCol={{ offset: 4, span: 16 }}
+                    wrapperCol={{ offset: 6, span: 12 }}
                     style={{ marginBottom: 0 }}
                 >
                     <Button
