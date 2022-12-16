@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\School;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class DepartmentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "name" => $this->faker->company,
+            "description" => $this->faker->sentence,
+            "school_id" => School::inRandomOrder()->first()->id
         ];
     }
 }

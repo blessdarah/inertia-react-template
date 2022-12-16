@@ -18,7 +18,7 @@ class DissertationPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return Response::allow();
     }
 
     /**
@@ -28,9 +28,9 @@ class DissertationPolicy
      * @param  \App\Models\Dissertation  $dissertation
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Dissertation $dissertation)
+    public function view(?User $user, Dissertation $dissertation)
     {
-        //
+        return Response::allow();
     }
 
     /**
@@ -41,7 +41,7 @@ class DissertationPolicy
      */
     public function create(User $user)
     {
-        //
+        return Response::allow();
     }
 
     /**
@@ -53,7 +53,7 @@ class DissertationPolicy
      */
     public function update(User $user, Dissertation $dissertation)
     {
-        //
+        return Response::allow();
     }
 
     /**
@@ -65,7 +65,7 @@ class DissertationPolicy
      */
     public function delete(User $user, Dissertation $dissertation)
     {
-        //
+        return Response::allow();
     }
 
     /**

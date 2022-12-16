@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDissertationRequest;
 use App\Http\Requests\UpdateDissertationRequest;
+use App\Models\Department;
 use App\Models\Dissertation;
+use App\Models\School;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class DissertationController extends Controller
 {
@@ -15,7 +19,17 @@ class DissertationController extends Controller
      */
     public function index()
     {
-        //
+        $dissertations = Dissertation::with(["school", "department"])->get();
+        $schools = School::all();
+        $departments = Department::all();
+        return Inertia::render(
+            'Dissertation/DissertationPage',
+            [
+                "dissertations" => $dissertations,
+                "schools" => $schools,
+                "departments" => $departments
+            ]
+        );
     }
 
     /**
@@ -36,7 +50,13 @@ class DissertationController extends Controller
      */
     public function store(StoreDissertationRequest $request)
     {
-        //
+        $data = $request->validated();
+        if ($request->hasFile('cover_image')) {
+            $data['cover_page'] = $request->file("cover_page")->storePublicly("uploaded-images");
+            $data['file'] = $request->file('file')->storePublicly("uploaded-files");
+        }
+        Dissertation::create($data);
+        return redirect()->route("dissertations.index");
     }
 
     /**
@@ -58,7 +78,16 @@ class DissertationController extends Controller
      */
     public function edit(Dissertation $dissertation)
     {
-        //
+        $schools = School::all();
+        $departments = Department::all();
+        return Inertia::render(
+            'Dissertation/EditDissertationPage',
+            [
+                "dissertation" => $dissertation,
+                "schools" => $schools,
+                "departments" => $departments
+            ]
+        );
     }
 
     /**
@@ -70,7 +99,19 @@ class DissertationController extends Controller
      */
     public function update(UpdateDissertationRequest $request, Dissertation $dissertation)
     {
-        //
+        $oldDissertation = Dissertation::find($dissertation->id);
+        dd($oldDissertation);
+        $data = $request->validated();
+        if ($request->hasFile('file')) {
+            Storage::delete($oldDissertation->file);
+            $data['file'] = $request->file('file')->storePublicly("uploaded-files");
+        }
+        if ($request->hasFile('cover_page')) {
+            Storage::delete($oldDissertation->cover_page);
+            $data['cover_page'] = $request->file('file')->storePublicly("uploaded-images");
+        }
+        $dissertation->update($data);
+        return redirect()->route("dissertations.index");
     }
 
     /**
@@ -81,6 +122,9 @@ class DissertationController extends Controller
      */
     public function destroy(Dissertation $dissertation)
     {
-        //
+        Storage::delete($dissertation->file);
+        Storage::delete($dissertation->cover_page);
+        $dissertation->delete();
+        return redirect()->route("dissertations.index");
     }
 }

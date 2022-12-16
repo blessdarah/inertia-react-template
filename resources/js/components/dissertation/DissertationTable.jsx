@@ -1,22 +1,25 @@
-import React, { useState } from "react";
-import { Table, Empty, Card, Input } from "antd";
-import { departmentTableColumns } from "./departmentTableColumns";
 import { SearchOutlined } from "@ant-design/icons";
+import { Card, Empty, Input, Table } from "antd";
+import React, { useState } from "react";
+import { dissertationTableColumns } from "./DissertationTableColumns";
 
-const DepartmentTable = ({ departments }) => {
-    const [filteredData, setFilteredData] = useState(departments);
+const DissertationTable = ({ dissertations }) => {
+    const [filteredData, setFilteredData] = useState(dissertations);
 
     const handleSearch = (e) => {
         const value = e.target.value;
         const result =
             value !== ""
-                ? departments.filter((item) =>
-                      item.name.toLowerCase().includes(value)
+                ? dissertations.filter(
+                      (item) =>
+                          item.title.toLowerCase().includes(value) ||
+                          item.author.toLowerCase().includes(value) ||
+                          item.school.name.toLowerCase().includes(value) ||
+                          item.department.name.toLowerCase().includes(value)
                   )
-                : departments;
+                : dissertations;
         setFilteredData(result);
     };
-
     return (
         <Card
             size="small"
@@ -35,13 +38,13 @@ const DepartmentTable = ({ departments }) => {
                     rowKey="id"
                     scroll={{ x: "800px" }}
                     dataSource={filteredData}
-                    columns={departmentTableColumns}
+                    columns={dissertationTableColumns}
                 />
             ) : (
-                <Empty description="No department available" />
+                <Empty description="No dissertation available" />
             )}
         </Card>
     );
 };
 
-export default DepartmentTable;
+export default DissertationTable;

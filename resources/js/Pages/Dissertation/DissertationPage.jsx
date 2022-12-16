@@ -1,30 +1,43 @@
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Button, Col, Row } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import React from "react";
-import { FORM_MODE } from "../../components/constants";
-import SchoolForm from "../../components/dissertation/SchoolForm";
+import DissertationTable from "../../components/dissertation/DissertationTable";
+import DissertationForm from "../../components/dissertation/DissertationForm";
+import { useAppModal } from "../../hooks/app-modal";
 import AppShell from "../../layouts/app-shell";
 
-const DissertationPage = ({ dissertation }) => {
+const EditDissertationPage = ({ dissertations, schools, departments }) => {
+    const { setContent, setWidth, setTitle, setShow } = useAppModal();
+
+    const handleClick = () => {
+        setWidth("45rem");
+        setTitle("Create new dissertation");
+        setContent(
+            <DissertationForm schools={schools} departments={departments} />
+        );
+        setShow(true);
+    };
+
     return (
-        <Row>
-            <Col md={16} offset={4}>
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        margin: "1rem 0",
-                    }}
-                >
-                    <h3>Edit dissertation</h3>
-                    <Button icon={<ArrowLeftOutlined />}>back</Button>
-                </div>
-                <SchoolForm dissertation={dissertation} mode={FORM_MODE.EDIT} />
-            </Col>
-        </Row>
+        <div>
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    margin: "1rem 0",
+                }}
+            >
+                <h3>Facultites / dissertations</h3>
+                <Button onClick={handleClick} icon={<PlusOutlined />}>
+                    Add dissertation
+                </Button>
+            </div>
+            <DissertationTable dissertations={dissertations} />
+        </div>
     );
 };
 
-DissertationPage.layout = (page) => <AppShell children={page} />;
-export default DissertationPage;
+EditDissertationPage.layout = (page) => <AppShell children={page} />;
+
+export default EditDissertationPage;

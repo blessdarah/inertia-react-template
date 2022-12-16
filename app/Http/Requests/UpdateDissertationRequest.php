@@ -15,7 +15,8 @@ class UpdateDissertationRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('update', Dissertation::class);
+        return true;
+        // return $this->user()->can('update', Dissertation::class);
     }
 
     /**
@@ -28,21 +29,22 @@ class UpdateDissertationRequest extends FormRequest
         return [
             "school_id" => 'required',
             "department_id" => 'required',
-            "abstract" => 'required|string', 
-            "title" => 'required|string', 
-            "author" => 'required|string', 
-            "supervisor" => 'required|string', 
-            "cover_page" => 'required|image|max:500', 
-            "file" => [ 'required', 
-                        File::types(['pdf'])
-                            ->min(1024)
-                            ->max(5 * 1024)
-                    ]
+            "abstract" => 'required|string',
+            "title" => 'required|string',
+            "author" => 'required|string',
+            "supervisor" => 'required|string',
+            "cover_page" => 'required|image|max:500',
+            "file" => "required|string"
+            // "file" => [ 'required',
+            //             File::types(['pdf'])
+            //                 ->min(1024)
+            //                 ->max(5 * 1024)
+            //         ]
         ];
     }
 
 
-    public function messages() 
+    public function messages()
     {
         return [
             'school_id.required' => "School is required",

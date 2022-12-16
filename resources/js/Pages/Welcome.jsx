@@ -4,7 +4,7 @@ import React from 'react';
 const Welcome = () => {
     return (
         <div>
-            <p>Home page</p>
+            <p>Welcome to UBa Dissertations</p>
             <Button type="primary">Hello</Button>
         </div>
     )
